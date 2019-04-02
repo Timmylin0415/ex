@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style>
+
+</style>
+</head>
+<body> 
+<h1 align="center">
+<font face="Bookman old Style">
+HW1(<a href="https://jsfiddle.net/timmylin0415/e0L9oz6n/">Jsfiddle</a>)
+</font></h1>
+<div id="info">Painting on Wall
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js">
+</script>
+<!--------------------------------------------------------------->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+var camera, scene, renderer;
+
+init();
+animate();
+
+function init() {
+  scene = new THREE.Scene();
+
+  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 2000);
+  camera.position.z = 500;
+
+  light = new THREE.PointLight(0xffffff);
+  light.position.set(100, 300, 200);
+  scene.add(light);
+
+  var gridXZ = new THREE.GridHelper(1000, 60, 'red', 'white');
+  scene.add(gridXZ);
+
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x888888);
+
+  let controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+  document.body.appendChild(renderer.domElement);
+  ///////////////////////////////////////////////////////////
+  let wall = new THREE.Mesh(new THREE.BoxGeometry(1000, 200, 20), new THREE.MeshPhongMaterial());
+  scene.add(wall);
+  wall.position.set(0, 100, -490);
+
+	let wall1= new THREE.Mesh(new THREE.BoxGeometry(20, 200, 1000), new THREE.MeshPhongMaterial());
+  scene.add(wall1);
+  wall1.position.set(-490, 100, 0);
+
+
+	let wall2= new THREE.Mesh(new THREE.BoxGeometry(20, 200, 1000), new THREE.MeshPhongMaterial());
+  scene.add(wall2);
+  wall2.position.set(490, 100, 0);
+  
+   let wall4 = new THREE.Mesh(new THREE.BoxGeometry(1000, 200, 20), new THREE.MeshPhongMaterial());
+  scene.add(wall4);
+  wall4.position.set(0, 100, 490);
+
+	let wall5= new THREE.Mesh(new THREE.BoxGeometry(20, 200, 400), new THREE.MeshPhongMaterial());
+  scene.add(wall5);
+  wall5.position.set(-200, 100, 0);
+	
+  let wall6= new THREE.Mesh(new THREE.BoxGeometry(20, 200, 400), new THREE.MeshPhongMaterial());
+  scene.add(wall6);
+  wall6.position.set(200, 100, 0);
+  
+   let wall7= new THREE.Mesh(new THREE.BoxGeometry(40, 5, 200), new THREE.MeshPhongMaterial());
+  scene.add(wall7);
+  wall7.position.set(100, 40, 0);
+  
+  let wall8= new THREE.Mesh(new THREE.BoxGeometry(40, 40, 5), new THREE.MeshPhongMaterial());
+  scene.add(wall8);
+  wall8.position.set(100, 20, 70);
+  
+  let wall9= new THREE.Mesh(new THREE.BoxGeometry(40, 40, 5), new THREE.MeshPhongMaterial());
+  scene.add(wall9);
+  wall9.position.set(100, 20, -70);
+  
+   let wall10= new THREE.Mesh(new THREE.BoxGeometry(40, 5, 200), new THREE.MeshPhongMaterial());
+  scene.add(wall10);
+  wall10.position.set(-100, 40, 0);
+  
+  let wall11= new THREE.Mesh(new THREE.BoxGeometry(40, 40, 5), new THREE.MeshPhongMaterial());
+  scene.add(wall11);
+  wall11.position.set(-100, 20, 70);
+  
+  let wall12= new THREE.Mesh(new THREE.BoxGeometry(40, 40, 5), new THREE.MeshPhongMaterial());
+  scene.add(wall12);
+  wall12.position.set(-100, 20, -70);
+  
+  let loader = new THREE.TextureLoader();
+  loader.crossOrigin = ''
+  let texture = loader.load("https://i.imgur.com/fJ4TsbW.jpg"); // 570x713
+  let paint = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), new THREE.MeshPhongMaterial({
+    map: texture
+  }));
+  scene.add(paint)
+  paint.rotation.x = -0.5 * Math.PI
+  paint.position.y = 1;
+ 
+/*
+  spotLight = new THREE.SpotLight(0xffffff);
+  scene.add(spotLight);
+  spotLight.position.set ( 0, 100, 50 );
+
+  spotLight.angle = 0.68;
+  spotLight.penumbra = 0.4;
+  //spotLight.distance = 200;
+  spotLight.decay = 1;
+  captain = new THREE.Mesh (new THREE.SphereGeometry(5,20,20), new THREE.MeshBasicMaterial({color:'red'}));
+  scene.add (captain);
+  captain.material.visible = false;
+  
+  captain.position.set (0,75, 0);
+  
+  spotLight.target = captain;
+  scene.add (spotLight);
+  spotLightHelper = new THREE.SpotLightHelper (spotLight);
+  //scene.add (spotLightHelper)
+*/
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  render();
+}
+
+function render() {
+  renderer.render(scene, camera);
+}
+
+
+
+</script>
+</body>
+
+</html>
